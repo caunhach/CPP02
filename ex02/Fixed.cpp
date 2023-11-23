@@ -74,6 +74,52 @@ bool	Fixed::operator==(Fixed const &src)const
 	return (this->toFloat() == src.toFloat());
 }
 
+float	Fixed::operator+(Fixed const &src) const
+{
+	return (this->toFloat() + src.toFloat());
+}
+
+float	Fixed::operator-(Fixed const &src) const
+{
+	return (this->toFloat() - src.toFloat());
+}
+
+float	Fixed::operator*(Fixed const &src) const
+{
+	return (this->toFloat() * src.toFloat());
+}
+
+float	Fixed::operator/(Fixed const &src) const
+{
+	return (this->toFloat() / src.toFloat());
+}
+
+Fixed	Fixed::operator++()
+{
+	this->_value++;
+	return (*this);
+}
+
+Fixed	Fixed::operator--()
+{
+	this->_value--;
+	return (*this);
+}
+
+Fixed	Fixed::operator++(int)
+{
+	Fixed tmp = *this;
+	++this->_value;
+	return (tmp);
+}
+
+Fixed	Fixed::operator--(int)
+{
+	Fixed tmp = *this;
+	--this->_value;
+	return (tmp);
+}
+
 int	Fixed::getRawBits(void) const
 {
 	return (this->_value);
@@ -93,6 +139,38 @@ float	Fixed::toFloat(void) const
 {
 
 	return this->getRawBits() / (float)(1 << Fixed::_frac);
+}
+
+Fixed	&Fixed::min(Fixed &s1, Fixed &s2)
+{
+	if (s1.toFloat() <= s2.toFloat())
+		return (s1);
+	else
+		return (s2);
+}
+
+const Fixed	&Fixed::min(const Fixed &s1, const Fixed &s2)
+{
+	if (s1.toFloat() <= s2.toFloat())
+		return (s1);
+	else
+		return (s2);
+}
+
+Fixed	&Fixed::max(Fixed &s1, Fixed &s2)
+{
+	if (s1.toFloat() >= s2.toFloat())
+		return (s1);
+	else
+		return (s2);
+}
+
+const Fixed	&Fixed::max(const Fixed &s1, const Fixed &s2)
+{
+	if (s1.toFloat() >= s2.toFloat())
+		return (s1);
+	else
+		return (s2);
 }
 
 std::ostream & operator<<(std::ostream & o, Fixed const & src)
