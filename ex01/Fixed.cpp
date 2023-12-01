@@ -22,13 +22,13 @@ Fixed::Fixed(): _value(0)
 Fixed::Fixed(int const i)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->_value = i << Fixed::_frac;
+	this->_value = i << this->_frac;
 }
 
 Fixed::Fixed(float const f)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->_value = (int)roundf(f * (1 << Fixed::_frac));
+	this->_value = (int)roundf(f * (1 << this->_frac));
 }
 
 Fixed::~Fixed()
@@ -42,10 +42,11 @@ Fixed::Fixed(Fixed const &copy)
 	*this = copy;
 }
 
-Fixed & Fixed::operator=(Fixed const &src)
+Fixed &Fixed::operator=(Fixed const &src)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	this->_value = src.getRawBits();
+	if (this != &src)
+		this->setRawBits(src.getRawBits());
 	return (*this);
 }
 
@@ -67,10 +68,10 @@ int	Fixed::toInt(void) const
 float	Fixed::toFloat(void) const
 {
 
-	return this->getRawBits() / (float)(1 << Fixed::_frac);
+	return this->getRawBits() / (float)(1 << this->_frac);
 }
 
-std::ostream & operator<<(std::ostream & o, Fixed const & src)
+std::ostream &operator<<(std::ostream & o, Fixed const & src)
 {
 	o << src.toFloat();
 	return o;

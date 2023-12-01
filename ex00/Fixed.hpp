@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<iostream>
+#include <iostream>
 
 class Fixed
 {
@@ -21,7 +21,7 @@ class Fixed
 		Fixed();
 		~Fixed();
 		Fixed(Fixed const &copy);
-		Fixed & operator = (Fixed const &src);
+		Fixed 	&operator = (Fixed const &src);
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 };
