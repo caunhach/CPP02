@@ -108,14 +108,14 @@ Fixed	Fixed::operator--()
 Fixed	Fixed::operator++(int)
 {
 	Fixed tmp = *this;
-	++this->_value;
+	this->_value++;
 	return (tmp);
 }
 
 Fixed	Fixed::operator--(int)
 {
 	Fixed tmp = *this;
-	--this->_value;
+	this->_value--;
 	return (tmp);
 }
 
